@@ -94,22 +94,10 @@ class ServiceNowAdapter extends EventEmitter {
    *   that handles the response.
    */
   healthcheck(callback) {
-    this.getRecord((result, error) => {
-      log.info('Returned from getRecord()');
-
-      if (error) {
-          log.info('ServiceNow Offline');
-          log.error('Returned error: ${JSON.stringify(error)');
-          log.error(`Error: ServiceNow is Offline: ${JSON.stringify(this.id)}`);
-          this.emitOffline();         
-      } else {
-          this.emitOnline();
-          log.debug('\nServiceNow Instance ID=' + this.id + '\nServiceNow Instance Error=+ ${JSON.stringify(result)}');
-      }
-
-      if (callback) callback(response, error);
-    });
-}
+    // We will build this method in a later lab. For now, it will emulate
+    // a healthy integration by emmitting ONLINE.
+    this.emitOnline();
+  }
 
   /**
    * @memberof ServiceNowAdapter
