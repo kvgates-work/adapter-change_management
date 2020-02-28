@@ -158,49 +158,12 @@ class ServiceNowAdapter extends EventEmitter {
    *   handles the response.
    */
   getRecord(callback) {
-    var response;
-    var changeTickets = new Array();
-
     this.connector.get((data, error) => {
        if (error) {
-           log.error('Connector Get Method Returned Error: ${JSON.stringify(error)');
-           if (callback) callback(response, error);
-       } else {
-           if (data && data != null && typeof (data == 'object') && ('body' in data)) {
-            let body = JSON.parse(data.body);
-            for (var x in body.result) {
-                 // Add element to changeTickets for each element in result
-                 changeTickets.push({
-                     "change_ticket_number" : body.result[x].number,
-                     "active"               : body.result[x].active,
-                     "priority"             : body.result[x].priority,
-                     "description"          : body.result[x].description,
-                     "work_start"           : body.result[x].work_start,
-                     "work_end"             : body.result[x].work_end,
-                     "change_ticket_key"    : body.result[x].sys_id
-                 });
-             }
-
-             response = changeTickets;
-             error    = "";
-
-             log.info('Returned ServiceNow Get Change Tickets:');
-             log.info(JSON.stringify(response));
-
-             if (callback) {
-                 log.info('Callback Exists');
-                 callback(response, error);   
-             } else {
-                 log.info('No callback');
-             }
-
-           } else {
-             log.info('No results from ServiceNow Get Change Tickets');
-             response = "";
-             error    = "No results from ServiceNow Get Change Tickets";
-             if (callback) callback(response, error);
-           }
+         console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
        }
+
+       console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`);
      });
   }
 
@@ -214,47 +177,12 @@ class ServiceNowAdapter extends EventEmitter {
    *   handles the response.
    */
   postRecord(callback) {
-    var response;
-
     this.connector.post((data, error) => {
        if (error) {
-           log.error('Connector Post Method Returned Error: ${JSON.stringify(error)');
-           if (callback) callback(response, error);
-       } else {
-           if (data && data != null && typeof (data == 'object') && ('body' in data)) {
-            let body = JSON.parse(data.body);
-
-            let changeTickets = 
-            {
-                change_ticket_number: body.result.number,
-                active: body.result.active,
-                priority: body.result.priority,
-                description: body.result.description,
-                work_start: body.result.work_start,
-                work_end: body.result.work_end,
-                change_ticket_key: body.result.sys_id
-            };
-
-             response = changeTickets;
-             error    = "";
-
-             log.info('Returned ServiceNow Post:');
-             log.info(JSON.stringify(response));
-
-             if (callback) {
-                 log.info('Callback Exists');
-                 callback(response, error);   
-             } else {
-                 log.info('No callback');
-             }
-
-           } else {
-             log.info('No results from ServiceNow Post');
-             response = "";
-             error    = "No results from ServiceNow Post";
-             if (callback) callback(response, error);
-           }
+         console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
        }
+
+       console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`);
      });
   }
 }
