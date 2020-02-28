@@ -104,7 +104,7 @@ class ServiceNowAdapter extends EventEmitter {
           this.emitOffline();         
       } else {
           this.emitOnline();
-          log.debug('\nServiceNow Instance ID=' + this.id + '\nServiceNow Instance Error=+ ${JSON.stringify(result)}');
+          log.debug('\nServiceNow Instance ID=' + this.id + '\nServiceNow Instance Result=+ ${JSON.stringify(result)}');
       }
 
       if (callback) callback(response, error);
