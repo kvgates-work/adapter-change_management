@@ -151,7 +151,7 @@ class ServiceNowAdapter extends EventEmitter {
          console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
        }
 
-       console.log(`\nResponse returned from GET request`);
+       console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`);
      });
   }
 
